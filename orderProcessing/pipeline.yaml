@@ -33,7 +33,7 @@ spec:
       name: kaniko
     workspaces:
     - name: source
-      workspace: shared-data
+      workspace: shared-data/orderProcessing
     params:
     - name: IMAGE
       value: $(params.image-reference)

@@ -20,3 +20,10 @@ spec:
   params:
   - name: repo-url
     value: https://github.com/elpinjo/gitops.git
+  - name: image-reference
+    value: registry.registry/oders-processing-edge:11.1
+  - name: edge-version
+    value: 11.0.10
+  - name: wpm-token
+    value: yJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzYWctY2lhbSIsImF1ZCI6InBhY2thZ2UtbWFuYWdlciIsImlzcyI6IlNvZnR3YXJlQUciLCJudW1EYXlzIjoiOTAiLCJpZCI6Ik1pc2phLkhldXZlbGluZ0BpYm0uY29tIiwibGFiZWwiOiJidWlsZGVyIiwiZXhwIjoxNzUwNTkwMTUzfQ.CYOKHhRsdz6jMEQ5G2UU91UCkZv9gVlP7fFOdR8OMUKQTN9QdDDKOsm1fNZA6nStfpa3o_2sIsAvmibB8vrSAECy7K5OtGiKo0D-5NJKSYo4BK-UpGYp88u6L-gFwNwpSvVdHtaBAcVPBySnw0mHewCDBQ9WblLSyu1I2Fjy4XFrLfbP3ZxrLTFDMgOajSsbA6NwBntMzGEVXM3-MXvywcj7if7Ezm66NIa58vuQ83YABHU3O3rhNIAKDyitjuhuxQLUiYltUVLiupJ364uyrktuzHl9QNkr51x4C17_g9b7o0Nrrsb_vErnOrWrr8SMgKBOP-xJX2oBOirnnkLpgg
+    
