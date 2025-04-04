@@ -15,8 +15,13 @@ spec:
     type: string
   - name: wpm-token
     type: string
+  - name: github-user
+    type: string
+  - name: github-token
+    type: string
   workspaces:
   - name: shared-data
+  - name: docker-credentials
   tasks:
   - name: fetch-source
     taskRef:
@@ -32,10 +37,22 @@ spec:
     taskRef:
       name: kaniko
     workspaces:
+    - name: dockerconfig
+      workspace: docker-credentials
     - name: source
-      workspace: shared-data/orderProcessing
+      workspace: shared-data
+      subPath: orderProcessing
     params:
     - name: IMAGE
       value: $(params.image-reference)
     - name: EXTRA_ARGS
-      value: --build-arg EDGE_VERSION=$(params.edge-version) --build-arg WPM_CRED=$(params.wpm-token)
+      value:
+      - --skip-tls-verify
+      - --build-arg 
+      - EDGE_VERSION=$(params.edge-version)
+      - --build-arg 
+      - WPM_CRED=$(params.wpm-token)
+      - --build-arg 
+      - GITHUB_CREDS_USR=$(params.github-user)
+      - --build-arg 
+      - GITHUB_CREDS_PSW=$(params.github-token)

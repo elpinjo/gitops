@@ -9,6 +9,9 @@ spec:
     securityContext:
       fsGroup: 65532
   workspaces:
+  - name: docker-credentials
+    secret:
+      secretName: docker-credentials
   - name: shared-data
     volumeClaimTemplate:
       spec:
@@ -21,9 +24,12 @@ spec:
   - name: repo-url
     value: https://github.com/elpinjo/gitops.git
   - name: image-reference
-    value: registry.registry/oders-processing-edge:11.1
+    value: registry-service.registry/oders-processing-edge:11.1
   - name: edge-version
     value: 11.0.10
   - name: wpm-token
-    value: yJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzYWctY2lhbSIsImF1ZCI6InBhY2thZ2UtbWFuYWdlciIsImlzcyI6IlNvZnR3YXJlQUciLCJudW1EYXlzIjoiOTAiLCJpZCI6Ik1pc2phLkhldXZlbGluZ0BpYm0uY29tIiwibGFiZWwiOiJidWlsZGVyIiwiZXhwIjoxNzUwNTkwMTUzfQ.CYOKHhRsdz6jMEQ5G2UU91UCkZv9gVlP7fFOdR8OMUKQTN9QdDDKOsm1fNZA6nStfpa3o_2sIsAvmibB8vrSAECy7K5OtGiKo0D-5NJKSYo4BK-UpGYp88u6L-gFwNwpSvVdHtaBAcVPBySnw0mHewCDBQ9WblLSyu1I2Fjy4XFrLfbP3ZxrLTFDMgOajSsbA6NwBntMzGEVXM3-MXvywcj7if7Ezm66NIa58vuQ83YABHU3O3rhNIAKDyitjuhuxQLUiYltUVLiupJ364uyrktuzHl9QNkr51x4C17_g9b7o0Nrrsb_vErnOrWrr8SMgKBOP-xJX2oBOirnnkLpgg
-    
+    value: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzYWctY2lhbSIsImF1ZCI6InBhY2thZ2UtbWFuYWdlciIsImlzcyI6IlNvZnR3YXJlQUciLCJudW1EYXlzIjoiOTk5IiwiaWQiOiJNaXNqYS5IZXV2ZWxpbmdAaWJtLmNvbSIsImxhYmVsIjoidGVrdG9uIiwiZXhwIjoxODMwMDkzMTk0fQ.pZXSAvrwssYHMO_OpxPPXIbZb26yDQlcFH6e_v6UOTV9N44Km4UsdIdE7_fgQaLCHziOgMSSg1miejNAWB_7nYj1nwSve-tDnD7q0KreuK4PcEjzvvn9925LnqlY4Z249VDR4YDAu2Mr3ykKpdDGC_WT964x_wKQ0Zck3NiPg-xZAz1qeeMn7u-ebxYv_DgLAJCUcgXxjBXBDxD3TFBwE0giaen0_KXsY5eVSxmRaditLtsdnb5DUA74dUPHDlZzEFjp51SSRwS0NXcamBkz43d4jLr3bVOhKEz9vWR1WoeMylrR0UagKKP_sDFPDwrldA2TongryhqN6721Hx8-LA
+  - name: github-user
+    value: elpinjo
+  - name: github-token
+    value: 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
