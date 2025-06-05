@@ -1,6 +1,6 @@
 ARG EDGE_VERSION
 
-FROM ibmwebmethods.azurecr.io/webmethods-edge-runtime:${EDGE_VERSION}
+FROM ibmhybridcr.azurecr.io/webmethods-edge-runtime:${EDGE_VERSION}
 
 ARG WPM_CRED
 ARG GITHUB_CREDS_USR

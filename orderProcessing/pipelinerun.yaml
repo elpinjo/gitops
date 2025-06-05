@@ -26,7 +26,7 @@ spec:
   - name: image-reference
     value: registry-service.registry/oders-processing-edge:11.1
   - name: edge-version
-    value: 11.0.10
+    value: 11.1.0
   - name: wpm-token
     value: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzYWctY2lhbSIsImF1ZCI6InBhY2thZ2UtbWFuYWdlciIsImlzcyI6IlNvZnR3YXJlQUciLCJudW1EYXlzIjoiOTk5IiwiaWQiOiJNaXNqYS5IZXV2ZWxpbmdAaWJtLmNvbSIsImxhYmVsIjoidGVrdG9uIiwiZXhwIjoxODMwMDkzMTk0fQ.pZXSAvrwssYHMO_OpxPPXIbZb26yDQlcFH6e_v6UOTV9N44Km4UsdIdE7_fgQaLCHziOgMSSg1miejNAWB_7nYj1nwSve-tDnD7q0KreuK4PcEjzvvn9925LnqlY4Z249VDR4YDAu2Mr3ykKpdDGC_WT964x_wKQ0Zck3NiPg-xZAz1qeeMn7u-ebxYv_DgLAJCUcgXxjBXBDxD3TFBwE0giaen0_KXsY5eVSxmRaditLtsdnb5DUA74dUPHDlZzEFjp51SSRwS0NXcamBkz43d4jLr3bVOhKEz9vWR1WoeMylrR0UagKKP_sDFPDwrldA2TongryhqN6721Hx8-LA
   - name: github-user
