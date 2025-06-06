@@ -17,5 +17,6 @@ RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CR
 RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer OrderAnalytics
 
 COPY mysql-connector-j-9.1.0.jar /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter/code/jars
+COPY postgresql-42.7.6.jar /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter/code/jars
 COPY eem.jks /opt/softwareag/common/config/
 WORKDIR /
