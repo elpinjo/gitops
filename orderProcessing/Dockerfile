@@ -21,5 +21,5 @@ RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CR
 COPY mysql-connector-j-9.1.0.jar /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter/code/jars 
 #/opt/softwareag/IntegrationServer/lib/jars/custom
 COPY postgresql-42.7.6.jar /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter/code/jars
-COPY eem.jks /opt/softwareag/common/config/
+COPY eem.jks /opt/softwareag/common/conf/
 WORKDIR /
