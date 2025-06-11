@@ -19,6 +19,8 @@ spec:
     type: string
   - name: github-token
     type: string
+  - name: agent-key
+    type: string
   workspaces:
   - name: shared-data
   - name: docker-credentials
@@ -56,3 +58,5 @@ spec:
       - GITHUB_CREDS_USR=$(params.github-user)
       - --build-arg 
       - GITHUB_CREDS_PSW=$(params.github-token)
+      - --build-arg
+      - AGENT_KEY=$(params.agent-key)
