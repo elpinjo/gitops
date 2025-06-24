@@ -21,6 +21,7 @@ RUN /opt/softwareag/wpm/bin/wpm.sh install -ws https://packages.webmethods.io -w
 RUN /opt/softwareag/wpm/bin/wpm.sh install -ws https://packages.webmethods.io -wr supported -d /opt/softwareag/IntegrationServer -j ${WPM_CRED} WmStreaming
 RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer OrderEntry
 RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer OrderAnalytics
+RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer VDV
 RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer NL_MIHE_GitbasedProject.git
 
 COPY mysql-connector-j-9.1.0.jar /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter/code/jars 
