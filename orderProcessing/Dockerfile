@@ -1,6 +1,6 @@
 ARG EDGE_VERSION
 
-FROM ibmhybridcr.azurecr.io/webmethods-edge-runtime:${EDGE_VERSION}
+FROM ibmwebmethods.azurecr.io/webmethods-microservicesruntime:${EDGE_VERSION}
 
 ARG WPM_CRED
 ARG GITHUB_CREDS_USR
@@ -11,7 +11,6 @@ WORKDIR /opt/softwareag/wpm
 
 
 ENV PATH=/opt/softwareag/wpm/bin:$PATH
-#ENV JAVA_CUSTOM_OPTS="-javaagent:/opt/softwareag/instana/instana-javaagent-1.0.0.jar"
 
 RUN mkdir /opt/softwareag/instana; cd /opt/softwareag/instana; \
    curl -o instana-javaagent-1.0.0.jar https://_:${AGENT_KEY}@artifact-public.instana.io/artifactory/shared/com/instana/instana-javaagent/1.0.0/instana-javaagent-1.0.0.jar
@@ -21,11 +20,8 @@ RUN /opt/softwareag/wpm/bin/wpm.sh install -ws https://packages.webmethods.io -w
 RUN /opt/softwareag/wpm/bin/wpm.sh install -ws https://packages.webmethods.io -wr supported -d /opt/softwareag/IntegrationServer -j ${WPM_CRED} WmStreaming
 RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer OrderEntry
 RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer OrderAnalytics
-RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer VDV
-RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer NL_MIHE_GitbasedProject.git
+RUN /opt/softwareag/wpm/bin/wpm.sh install -u ${GITHUB_CREDS_USR} -p ${GITHUB_CREDS_PSW} -r https://github.com/elpinjo -d /opt/softwareag/IntegrationServer NL_MIHE_OrderManagementProject
 
-COPY mysql-connector-j-9.1.0.jar /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter/code/jars 
-#/opt/softwareag/IntegrationServer/lib/jars/custom
-COPY postgresql-42.7.6.jar /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter/code/jars
-COPY eem.jks /opt/softwareag/common/conf/
+ADD --chown=1724:1724 https://jdbc.postgresql.org/download/postgresql-42.7.8.jar /opt/softwareag/IntegrationServer/lib/jars/custom/
+ADD --chown=1724:1724 eem.jks /opt/softwareag/common/conf/
 WORKDIR /
