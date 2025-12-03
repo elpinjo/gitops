@@ -43,7 +43,7 @@ data:
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.datasourceClass=org.postgresql.ds.PGSimpleDataSource
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.expireTimeout=1000
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.minimumPoolSize=1
-    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.portNumber=3306
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.portNumber=5432
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.password=$vault{myis#order_mgmt_db_password}
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.databaseName=ordermgt
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.driverType=Default
