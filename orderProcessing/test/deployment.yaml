@@ -96,7 +96,7 @@ spec:
                   name: vault-token-secret
                   key: vault-token
             - name: SAG_IS_CLOUD_REGISTER_TOKEN
-              valueeFrom:
+              valueFrom:
                 secretKeyRef:
                   name: cloud-token-secret
                   key: cloud-register-token
