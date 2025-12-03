@@ -45,7 +45,7 @@ data:
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.minimumPoolSize=1
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.portNumber=5432
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.password=$vault{myis#order_mgmt_db_password}
-    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.databaseName=ordermgt
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.databaseName=ordermgmt
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.driverType=Default
     artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.blockingTimeout=1000
     vault.myis.type=com.webmethods.is.vault.hashicorp.HashiCorpVaultConnection
