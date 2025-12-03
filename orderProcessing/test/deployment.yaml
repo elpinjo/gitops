@@ -1,0 +1,129 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: application-properties-cloud-is
+  namespace: "iwhi-infra"
+data:
+  application.properties: |
+    healthindicators.Adapters.enabled=true
+    healthindicators.Cluster.enabled=true
+    healthindicators.Cluster.properties.threshold.value=2
+    healthindicators.Diskspace.enabled=true
+    healthindicators.Diskspace.properties.threshold.value=10
+    healthindicators.HybridConnections.enabled=true
+    healthindicators.JDBC.enabled=true
+    healthindicators.JMS.enabled=true
+    healthindicators.JNDIAliases.enabled=false
+    healthindicators.Memory.enabled=true
+    healthindicators.Memory.properties.threshold.value=10
+    healthindicators.RemoteServers.enabled=true
+    healthindicators.SFTPServers.enabled=true
+    healthindicators.ServiceThread.enabled=true
+    healthindicators.ServiceThread.properties.threshold.value=10
+    healthindicators.Sessions.enabled=true
+    healthindicators.Sessions.properties.threshold.value=85
+    healthindicators.UMAliases.enabled=true
+    truststore.EEMOpenShift.ksDescription=Event Endpoint management Truststore
+    truststore.EEMOpenShift.ksLocation=../common/config/eem.jks
+    truststore.EEMOpenShift.ksPassword=manage
+    truststore.EEMOpenShift.ksStoreProviderName=SUN
+    truststore.EEMOpenShift.ksType=JKS
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionEnabled=true
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.user=$vault{myis#order_mgmt_db_user}
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.otherProperties=
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.startupBackoffSecs=10
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.transactionType=LOCAL_TRANSACTION
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.heartBeatInterval=0
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.poolable=true
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.serverName=192.168.25.8
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.poolIncrementSize=1
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.startupRetryCount=0
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.maximumPoolSize=10
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.networkProtocol=
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.datasourceClass=org.postgresql.ds.PGSimpleDataSource
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.expireTimeout=1000
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.minimumPoolSize=1
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.portNumber=3306
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.password=$vault{myis#order_mgmt_db_password}
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.databaseName=ordermgt
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionSettings.driverType=Default
+    artConnection.OrderEntry.orderentry.adapter.MYSQL.connectionManagerSettings.blockingTimeout=1000
+    vault.myis.type=com.webmethods.is.vault.hashicorp.HashiCorpVaultConnection
+    vault.myis.enabled=true
+    vault.myis.primary=true
+    vault.myis.secretsCache.ttlSeconds=0
+    vault.myis.properties.VAULT_ADDR=$env{VAULT_URL}
+    vault.myis.properties.VAULT_TOKEN=$env{VAULT_TOKEN}
+    vault.myis.properties.TLS_CERT_FILE=$file{/vault/vault-cert.crt}
+    vault.myis.properties.SECRET_MOUNT_PATH=order-mgmt
+    vault.myis.properties.ENCRYPTION_KEY=wm-key
+    user.Administrator.password=$vault{myis#admin_password}
+---
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata:
+  name: "order-management"
+  namespace: "iwhi-infra"
+  labels:
+    app: "order-management"
+spec:
+  selector:
+    matchLabels:
+      app: "order-management" 
+  template: 
+    metadata:
+      labels:
+        app: "order-management"
+    spec:
+      containers:
+        - name: "order-management"
+          image: "registry.k8s/oders-processing-edge:11.1.1"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5555
+              name: "admin-port"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /opt/swagmsr/config
+          env:
+            - name: "SAG_IS_CONFIG_PROPERTIES"
+              value: "/opt/swagmsr/config/application.properties"
+            - name: VAULT_URL
+              value: "https://vault.vault:8200"
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vault-token-secret
+                  key: vault-token
+            - name: SAG_IS_CLOUD_REGISTER_TOKEN
+              valueeFrom:
+                secretKeyRef:
+                  name: cloud-token-secret
+                  key: cloud-register-token
+            - name: SAG_IS_CLOUD_REGISTER_URL
+              value: https://dev5312404.a-fra-c1.int.ipaas.automation.ibm.com
+            - name: SAG_IS_EDGE_CLOUD_ALIAS
+              value: EdgeRuntime_NL_MIHE_KubernetesTest
+            - name: SAG_IS_HEALTH_ENDPOINT_ACL
+              value: Anonymous
+            - name: SAG_IS_CLOUD_ALLOWSYNC
+              value: "false"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: application-properties-cloud-is
+  replicas: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "order-management-is"
+  namespace: "iwhi-infra"
+spec: 
+  ports:
+    - name: is-port
+      port: 80
+      targetPort: "admin-port"
+  selector:
+    app: "order-management"
+  type: LoadBalancer
