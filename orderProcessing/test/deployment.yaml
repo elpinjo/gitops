@@ -55,7 +55,7 @@ data:
     vault.myis.properties.VAULT_ADDR=$env{VAULT_URL}
     vault.myis.properties.VAULT_TOKEN=$env{VAULT_TOKEN}
     vault.myis.properties.TLS_CERT_FILE=$file{/vault/vault-cert.crt}
-    vault.myis.properties.SECRET_MOUNT_PATH=order-mgmt
+    vault.myis.properties.SECRET_BASE_PATH=order-mgmt
     vault.myis.properties.ENCRYPTION_KEY=wm-key
     user.Administrator.password=$vault{myis#admin_password}
 ---
