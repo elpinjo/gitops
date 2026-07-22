@@ -78,7 +78,7 @@ spec:
       containers:
         - name: "order-management"
           description: "Order Management Integration Server"
-          image: "registry.k8s/oders-processing-edge:11.1.1"
+          image: "registry.k8s/oders-processing-edge:12.1.1"
           imagePullPolicy: Always
           ports:
             - containerPort: 5555
