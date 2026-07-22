@@ -89,7 +89,7 @@ spec:
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
-            - name: VAULT_ADDR
+            - name: VAULT_URL
               value: "https://vault.vault:8200"
             - name: VAULT_TOKEN
               valueFrom:
